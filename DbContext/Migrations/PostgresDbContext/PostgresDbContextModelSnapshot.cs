@@ -17,7 +17,7 @@ namespace DbContext.Migrations.PostgresDbContext
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.8")
+                .HasAnnotation("ProductVersion", "9.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -116,32 +116,6 @@ namespace DbContext.Migrations.PostgresDbContext
                     b.HasKey("MusicGroupId");
 
                     b.ToTable("MusicGroups", "supusr");
-                });
-
-            modelBuilder.Entity("DbModels.UserDbM", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("UserRole")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)");
-
-                    b.HasKey("UserId");
-
-                    b.ToTable("Users", "dbo");
                 });
 
             modelBuilder.Entity("Models.DTO.GstUsrInfoDbDto", b =>

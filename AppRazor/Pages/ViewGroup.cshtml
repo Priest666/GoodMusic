@@ -48,22 +48,24 @@
                     }
                 </div>
 
-                <div class="row g-1">
+              <div class="row g-1">
                     <h3 class="pb-2">Albums</h3>
 
                     <div class="row mb-2 text-center">
-                        <div class="col-md-10 themed-grid-head-col">Name</div>
+                        <div class="col-md-8 themed-grid-head-col">Name</div>
                         <div class="col-md-2 themed-grid-head-col">Release Year</div>
+                        <div class="col-md-2 themed-grid-head-col">Copies Sold</div>
                     </div>
+
                     @foreach (var item in Model.MusicGroup.Albums)
                     {
                         <div class="row mb-2 text-center">
-                            <div class="col-md-10 themed-grid-col">@item.Name</div>
+                            <div class="col-md-8 themed-grid-col">@item.Name</div>
                             <div class="col-md-2 themed-grid-col">@item.ReleaseYear</div>
+                            <div class="col-md-2 themed-grid-col">@item.CopiesSold</div>
                         </div>
                     }
                 </div>
-
             </div>
         </div>
     </form>

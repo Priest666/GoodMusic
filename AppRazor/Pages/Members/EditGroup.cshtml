@@ -158,9 +158,10 @@
                     <input type="hidden" name="albumId" data-seido-selected-item-id-target />
                     <h3 class="pb-2">Albums</h3>
 
-                    <div class="row mb-2 text-center">
-                        <div class="col-md-8 themed-grid-head-col">Name</div>
+                   <div class="row mb-2 text-center">
+                        <div class="col-md-6 themed-grid-head-col">Name</div>
                         <div class="col-md-2 themed-grid-head-col">Release Year</div>
+                        <div class="col-md-2 themed-grid-head-col">Copies Sold</div>
                         <div class="col-md-2 themed-grid-head-col">
                             <button class="btn btn-success btn-sm m-1" type="button"
                                     data-bs-toggle="collapse" data-bs-target="#collapseAddAlbum">
@@ -169,22 +170,32 @@
                         </div>
                     </div>
 
-                    <div class="collapse row mb-2 text-center" id="collapseAddAlbum">
-                        <div class="col-md-8 themed-grid-col">
-                            <input asp-for="MusicGroupInput.NewAlbum.AlbumName" class="form-control" value="" />
-                            <span asp-validation-for="MusicGroupInput.NewAlbum.AlbumName" class="invalid-feedback"></span>
-                        </div>
-                        <div class="col-md-2 themed-grid-col">
-                            <input asp-for="MusicGroupInput.NewAlbum.ReleaseYear" class="form-control" value="" />
-                            <span asp-validation-for="MusicGroupInput.NewAlbum.ReleaseYear" class="invalid-feedback"></span>
-                        </div>
+             <div class="collapse row mb-2 text-center" id="collapseAddAlbum">
 
-                        <div class="col-md-2 themed-grid-col">
-                            <button type="submit" asp-page-handler="AddAlbum" class="btn btn-success btn-sm m-1">
-                                Ok
-                            </button>
-                        </div>
-                    </div>
+                <div class="col-md-6 themed-grid-col">
+                    <input asp-for="MusicGroupInput.NewAlbum.AlbumName" class="form-control" />
+                    <span asp-validation-for="MusicGroupInput.NewAlbum.AlbumName" class="invalid-feedback"></span>
+                </div>
+
+                <div class="col-md-2 themed-grid-col">
+                    <input asp-for="MusicGroupInput.NewAlbum.ReleaseYear" class="form-control" />
+                    <span asp-validation-for="MusicGroupInput.NewAlbum.ReleaseYear" class="invalid-feedback"></span>
+                </div>
+
+                <div class="col-md-2 themed-grid-col">
+                    <input asp-for="MusicGroupInput.NewAlbum.CopiesSold" class="form-control" />
+                    <span asp-validation-for="MusicGroupInput.NewAlbum.CopiesSold" class="invalid-feedback"></span>
+                </div>
+
+                <div class="col-md-2 themed-grid-col">
+                    <button type="submit" asp-page-handler="AddAlbum" class="btn btn-success btn-sm m-1">
+                        Ok
+                    </button>
+                </div>
+
+            </div>
+
+
 
                     @for (int k = 0; k < Model.MusicGroupInput.Albums.Count; k++)
                     {
@@ -195,10 +206,13 @@
                             <input asp-for="MusicGroupInput.Albums[k].AlbumId" value="@Model.MusicGroupInput.Albums[k].AlbumId" class="form-control" type="hidden" />
                             <input asp-for="MusicGroupInput.Albums[k].AlbumName" value="@Model.MusicGroupInput.Albums[k].AlbumName" class="form-control" type="hidden" />
                             <input asp-for="MusicGroupInput.Albums[k].ReleaseYear" value="@Model.MusicGroupInput.Albums[k].ReleaseYear" class="form-control" type="hidden" />
+                            <input asp-for="MusicGroupInput.Albums[k].CopiesSold" value="@Model.MusicGroupInput.Albums[k].CopiesSold" class="form-control" type="hidden" />
 
-                            <div class="col-md-8 themed-grid-col">@Model.MusicGroupInput.Albums[k].AlbumName</div>
+                            <div class="col-md-6 themed-grid-col">@Model.MusicGroupInput.Albums[k].AlbumName</div>
                             <div class="col-md-2 themed-grid-col">@Model.MusicGroupInput.Albums[k].ReleaseYear</div>
+                            <div class="col-md-2 themed-grid-col">@Model.MusicGroupInput.Albums[k].CopiesSold</div>
                             <div class="col-md-2 themed-grid-col">
+
                                 <button class="btn btn-secondary btn-sm m-1" type="button"
                                         data-bs-toggle="collapse" data-bs-target="#collapseEditAlbum_@Model.MusicGroupInput.Albums[k].AlbumId"
                                         data-seido-selected-item-id="@Model.MusicGroupInput.Albums[k].AlbumId">
@@ -211,22 +225,30 @@
                                 </button>
                             </div>
                         </div>
+                 <div class="collapse row mb-2 text-center" id="collapseEditAlbum_@Model.MusicGroupInput.Albums[k].AlbumId">
 
-                        <div class="collapse row mb-2 text-center" id="collapseEditAlbum_@Model.MusicGroupInput.Albums[k].AlbumId">
-                            <div class="col-md-8 themed-grid-col">
-                                <input asp-for="MusicGroupInput.Albums[k].editAlbumName" class="form-control" value="@Model.MusicGroupInput.Albums[k].editAlbumName" />
-                                <span asp-validation-for="MusicGroupInput.Albums[k].editAlbumName" class="invalid-feedback"></span>
-                            </div>
-                            <div class="col-md-2 themed-grid-col">
-                                <input asp-for="MusicGroupInput.Albums[k].editReleaseYear" class="form-control" value="@Model.MusicGroupInput.Albums[k].editReleaseYear" />
-                                <span asp-validation-for="MusicGroupInput.Albums[k].editReleaseYear" class="invalid-feedback"></span>
-                            </div>
-                            <div class="col-md-2 themed-grid-col">
-                                <button type="submit" asp-page-handler="EditAlbum" class="btn btn-success btn-sm m-1">
-                                    Ok
-                                </button>
-                            </div>
-                        </div>
+                    <div class="col-md-6 themed-grid-col">
+                        <input asp-for="MusicGroupInput.Albums[k].editAlbumName" class="form-control" />
+                        <span asp-validation-for="MusicGroupInput.Albums[k].editAlbumName" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="col-md-2 themed-grid-col">
+                        <input asp-for="MusicGroupInput.Albums[k].editReleaseYear" class="form-control" />
+                        <span asp-validation-for="MusicGroupInput.Albums[k].editReleaseYear" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="col-md-2 themed-grid-col">
+                        <input asp-for="MusicGroupInput.Albums[k].editCopiesSold" class="form-control" />
+                        <span asp-validation-for="MusicGroupInput.Albums[k].editCopiesSold" class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="col-md-2 themed-grid-col">
+                        <button type="submit" asp-page-handler="EditAlbum" class="btn btn-success btn-sm m-1">
+                            Ok
+                        </button>
+                    </div>
+                </div>
+
                     }
                 </div>
 

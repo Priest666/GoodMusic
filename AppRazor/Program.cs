@@ -20,7 +20,7 @@ builder.Services.AddUserBasedDbContext();
 builder.Services.AddVersionInfo();
 builder.Services.AddEnvironmentInfo();
 
-#region Injecting a dependency service to read MusicWebApi
+#region Injecting a dependency   service to read MusicWebApi
 builder.Services.AddHttpClient(name: "MusicWebApi", configureClient: options =>
 {
     options.BaseAddress = new Uri(builder.Configuration["DataService:WebApiBaseUri"]);

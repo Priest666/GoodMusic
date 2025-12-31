@@ -180,6 +180,7 @@ namespace AppRazor.Pages
             //Implement the changes
             a.AlbumName = a.editAlbumName;
             a.ReleaseYear = a.editReleaseYear;
+            a.CopiesSold = a.editCopiesSold;
 
             return Page();
         }
@@ -410,6 +411,11 @@ namespace AppRazor.Pages
             [Range(1900, 2024, ErrorMessage = "You must provide a year between 1900 and 2024")]
             public int ReleaseYear { get; set; }
 
+            [Range(0, long.MaxValue, ErrorMessage = "Copies sold must be a non-negative number")]
+            public long CopiesSold { get; set; }
+
+            [Range(0, long.MaxValue)]
+            public long editCopiesSold { get; set; }
 
             [Required(ErrorMessage = "You must enter an album name")]
             public string editAlbumName { get; set; }
@@ -424,10 +430,10 @@ namespace AppRazor.Pages
                 AlbumId = original.AlbumId;
                 AlbumName = original.AlbumName;
                 ReleaseYear = original.ReleaseYear;
-
-
+                CopiesSold = original.CopiesSold;
                 editAlbumName = original.editAlbumName;
                 editReleaseYear = original.editReleaseYear;
+                editCopiesSold = original.editCopiesSold;
             }
             public AlbumIM(IAlbum model)
             {
@@ -435,6 +441,7 @@ namespace AppRazor.Pages
                 AlbumId = model.AlbumId;
                 AlbumName = editAlbumName = model.Name;
                 ReleaseYear = editReleaseYear = model.ReleaseYear;
+                CopiesSold = editCopiesSold = model.CopiesSold;
             }
             
             //to update the model in database
@@ -443,6 +450,7 @@ namespace AppRazor.Pages
                 model.AlbumId = this.AlbumId;
                 model.Name = this.AlbumName;
                 model.ReleaseYear = this.ReleaseYear;
+                model.CopiesSold = this.CopiesSold;
                 return model;
             }
 
@@ -451,7 +459,8 @@ namespace AppRazor.Pages
 
                 AlbumId = null,
                 Name = this.AlbumName,
-                ReleaseYear = this.ReleaseYear
+                ReleaseYear = this.ReleaseYear,
+                CopiesSold = this.CopiesSold
             };
         }
         public class MusicGroupIM

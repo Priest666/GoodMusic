@@ -47,25 +47,56 @@ public class AlbumsServiceWapi : IAlbumsService
     {
         string uri = $"albums/readitem?id={id}&flat={flat}";
 
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.GetAsync(uri);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;    
     }
     public async Task<ResponseItemDto<IAlbum>> DeleteAlbumAsync(Guid id)
     {
         string uri = $"albums/deleteitem/{id}";
 
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;        
     }
     public async Task<ResponseItemDto<IAlbum>> UpdateAlbumAsync(AlbumCUdto item)
     {
         string uri = $"albums/updateitem/{item.AlbumId}";
 
-        throw new NotImplementedException();
+        string json = JsonConvert.SerializeObject(item);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;     
     }
     public async Task<ResponseItemDto<IAlbum>> CreateAlbumAsync(AlbumCUdto item)
     {
         string uri = $"albums/createitem";
 
-        throw new NotImplementedException();
+        string json = JsonConvert.SerializeObject(item);
+
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await _httpClient.PostAsync(uri, content);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IAlbum>>(s, _jsonSettings);
+        return resp;    
     }
 }
 

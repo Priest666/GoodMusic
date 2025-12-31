@@ -47,25 +47,55 @@ public class ArtistsServiceWapi : IArtistsService
     {
         string uri = $"artists/readitem?id={id}&flat={flat}";
 
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.GetAsync(uri);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;    
     }
     public async Task<ResponseItemDto<IArtist>> DeleteArtistAsync(Guid id)
     {
         string uri = $"artists/deleteitem/{id}";
 
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.DeleteAsync(uri);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;           
     }
+
     public async Task<ResponseItemDto<IArtist>> UpdateArtistAsync(ArtistCUdto item)
     {
         string uri = $"artists/updateitem/{item.ArtistId}";
 
-        throw new NotImplementedException();
+        string json = JsonConvert.SerializeObject(item);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await _httpClient.PutAsync(uri, content);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;    
     }
     public async Task<ResponseItemDto<IArtist>> CreateArtistAsync(ArtistCUdto item)
     {
         string uri = $"artists/createitem";
+        string json = JsonConvert.SerializeObject(item);
+        var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
-        throw new NotImplementedException();
+        HttpResponseMessage response = await _httpClient.PostAsync(uri, content);
+
+        await response.EnsureSuccessStatusMessage();
+
+        string s = await response.Content.ReadAsStringAsync();
+        var resp = JsonConvert.DeserializeObject<ResponseItemDto<IArtist>>(s, _jsonSettings);
+        return resp;       
     }
 }
 
